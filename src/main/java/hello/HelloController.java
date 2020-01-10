@@ -1,6 +1,6 @@
 package hello;
 
-import hello.service.User;
+import hello.entity.User;
 import hello.service.UserService;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +15,7 @@ public class HelloController {
 
     @RequestMapping("/")
     public User index() {
-        return (User) this.userService.getUserById(1);
+        return this.userService.getUserById(1);
     }
 
 }

@@ -36,6 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public AuthenticationManager customAuthenticationManager() throws Exception {
-        return AuthenticationManager();
+        return authenticationManager();
     }
+
 }
