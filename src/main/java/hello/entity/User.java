@@ -21,25 +21,11 @@ public class User {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return username;
-    }
-
-    public void setName(String name) {
-        this.username = name;
-    }
-
     public String getUsername() {
         return username;
     }
 
-    public String getAvatar() {
-        return avatar;
-    }
+    public String getAvatar() { return avatar; }
 
     public Instant getCreatedAt() {
         return createdAt;

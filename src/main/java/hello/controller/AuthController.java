@@ -1,6 +1,7 @@
 package hello.controller;
 
 import hello.entity.User;
+import hello.service.UserService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -9,10 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import java.util.Map;
@@ -21,12 +19,19 @@ import java.util.Map;
 public class AuthController {
     private UserDetailsService userDetailsService;
     private AuthenticationManager authenticationManager;
+    private UserService userService;
 
     @Inject
-    public AuthController(UserDetailsService userDetailsService,
-                          AuthenticationManager authenticationManager) {
+    public AuthController(UserDetailsService userDetailsService, AuthenticationManager authenticationManager, UserService userService) {
         this.userDetailsService = userDetailsService;
         this.authenticationManager = authenticationManager;
+        this.userService = userService;
+    }
+
+    @RequestMapping("/")
+    @ResponseBody
+    public User index(@RequestParam("id") Integer id) {
+        return this.userService.getUserById(id);
     }
 
     @GetMapping("/auth")
@@ -40,9 +45,11 @@ public class AuthController {
     public Result login(@RequestBody Map<String, String> usernameAndPasswordJson){
         String username = usernameAndPasswordJson.get("username");
         String password = usernameAndPasswordJson.get("password");
-        UserDetails userDetails = null;
+        UserDetails userDetails;
         try{
-             userDetails = userDetailsService.loadUserByUsername(username);
+            userDetails = userService.loadUserByUsername(username);
+            System.out.println(userDetails);
+//             userDetails = userDetailsService.loadUserByUsername(username);
         } catch (UsernameNotFoundException e){
             return new Result("fail","用户不存在", false);
         }
