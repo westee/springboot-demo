@@ -17,27 +17,34 @@ import java.util.Map;
 
 @Controller
 public class AuthController {
-    private UserDetailsService userDetailsService;
     private AuthenticationManager authenticationManager;
     private UserService userService;
 
     @Inject
-    public AuthController(UserDetailsService userDetailsService, AuthenticationManager authenticationManager, UserService userService) {
-        this.userDetailsService = userDetailsService;
+    public AuthController( AuthenticationManager authenticationManager, UserService userService) {
         this.authenticationManager = authenticationManager;
         this.userService = userService;
     }
 
-    @RequestMapping("/")
-    @ResponseBody
-    public User index(@RequestParam("id") Integer id) {
-        return this.userService.getUserById(id);
-    }
+//    @RequestMapping("/")
+//    @ResponseBody
+//    public User index(@RequestParam("id") Integer id) {
+////        return this.userService.getUserById(id);
+//    }
 
     @GetMapping("/auth")
     @ResponseBody // 解决Spring MVC的遗留问题。这个注释指明方法的返回值应该被限定在web的响应体中。
     public Object auth() {
-        return new Result("ok", "登录成功", true);
+        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        User loggedInUser =  userService.getUserByUsername(userName);
+
+        if(loggedInUser == null){
+            return new Result("ok", "用户未登录", false);
+        } else {
+            return new Result("ok", null, true, loggedInUser);
+        }
+
     }
 
     @PostMapping("/auth/login")
@@ -47,9 +54,7 @@ public class AuthController {
         String password = usernameAndPasswordJson.get("password");
         UserDetails userDetails;
         try{
-            userDetails = userService.loadUserByUsername(username);
-            System.out.println(userDetails);
-//             userDetails = userDetailsService.loadUserByUsername(username);
+             userDetails = userService.loadUserByUsername(username);
         } catch (UsernameNotFoundException e){
             return new Result("fail","用户不存在", false);
         }
@@ -59,8 +64,7 @@ public class AuthController {
             authenticationManager.authenticate(token);
             SecurityContextHolder.getContext().setAuthentication(token);
 
-            User loggedInUser = new User(1, "里斯");
-            return new Result("ok", "登录成功", true, loggedInUser);
+            return new Result("ok", "登录成功", true, userService.getUserByUsername(username));
         } catch (BadCredentialsException e){
             return new Result("fail", "密码不正确", false);
         }
