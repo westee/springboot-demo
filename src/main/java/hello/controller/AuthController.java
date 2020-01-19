@@ -1,5 +1,6 @@
 package hello.controller;
 
+import hello.entity.Result;
 import hello.entity.User;
 import hello.service.UserService;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,12 +26,6 @@ public class AuthController {
         this.userService = userService;
     }
 
-//    @RequestMapping("/")
-//    @ResponseBody
-//    public User index(@RequestParam("id") Integer id) {
-////        return this.userService.getUserById(id);
-//    }
-
     @GetMapping("/auth")
     @ResponseBody // 解决Spring MVC的遗留问题。这个注释指明方法的返回值应该被限定在web的响应体中。
     public Object auth() {
@@ -51,36 +46,36 @@ public class AuthController {
         String username = usernameAndPassword.get("username");
         String password = usernameAndPassword.get("password");
         if (username == null || password == null) {
-            return new Result("fail", "username/password == null", false);
+            return Result.failResult( "用户名或密码不能为空");
         }
 
         if (username.length() < 6 || username.length() > 15) {
-            return new Result("fail", "invalid username", false);
+            return Result.failResult("用户名不合法");
         }
 
         if (password.length() < 6 || password.length() > 15) {
-            return new Result("fail", "invalid password", false);
+            return Result.failResult("密码不合法");
         }
 
-        User user = userService.getUserByUsername(username);
-
-        if (user == null) {
+        try {
             userService.save(username, password);
-            return new Result("ok", "success", false);
-        } else {
-            return new Result("fail", "用户已经存在", false);
+        } catch (Exception e){
+            e.printStackTrace();
+            return  Result.failResult("用户已存在");
         }
+        return new Result("ok", "注册成功", false);
     }
 
     @GetMapping("/auth/logout")
     @ResponseBody
-    public Object logout(@RequestParam String username){
-        User loggedInUser = userService.getUserByUsername(username);
-        if(loggedInUser == null){
-            return new Result("fail","用户没有登陆",false);
-        } else {
-            return new Result("ok", "注销成功", false);
-        }
+    public Object logout(){
+        SecurityContextHolder.clearContext();
+        return Result.successResult("注销成功");
+//        if(loggedInUser == null){
+//            return new Result("fail","用户没有登陆",false);
+//        } else {
+//            return new Result("ok", "注销成功", false);
+//        }
     }
 
     @PostMapping("/auth/login")
@@ -92,7 +87,7 @@ public class AuthController {
         try {
             userDetails = userService.loadUserByUsername(username);
         } catch (UsernameNotFoundException e) {
-            return new Result("fail", "用户不存在", false);
+            return  Result.failResult("用户不存在");
         }
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
 
@@ -102,43 +97,8 @@ public class AuthController {
 
             return new Result("ok", "登录成功", true, userService.getUserByUsername(username));
         } catch (BadCredentialsException e) {
-            return new Result("fail", "密码不正确", false);
+            return Result.failResult("密码不正确");
         }
     }
 
-    // JSON序列化的结果取决于getter方法,和字段无关.
-    private static class Result {
-        String status;
-        String message;
-        boolean isLogin;
-        Object data;
-
-        public Object getData() {
-            return data;
-        }
-
-        public Result(String status, String message, boolean isLogin) {
-            this(status, message, isLogin, null);
-        }
-
-        public Result(String status, String message, boolean isLogin, Object data) {
-            this.status = status;
-            this.message = message;
-            this.isLogin = isLogin;
-            this.data = data;
-        }
-
-        public String getStatus() {
-            return status;
-        }
-
-        public String getMessage() {
-            return message;
-        }
-
-        public boolean isLogin() {
-            return isLogin;
-        }
-
-    }
-}
+   }

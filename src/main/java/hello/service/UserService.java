@@ -10,8 +10,6 @@ import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.util.Collections;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 // 以下两个注解用来实现bean的声明。
 //@Component // 不需要JavaConfiguration中的配置了，等价于用@Bean现实的声明。
@@ -19,13 +17,11 @@ import java.util.concurrent.ConcurrentHashMap;
 public class UserService implements UserDetailsService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     private UserMapper userMapper;
-//    private Map<String, User> users = new ConcurrentHashMap<>(); // HashMap是线程不安全的
 
     @Inject
     public UserService(BCryptPasswordEncoder bCryptPasswordEncoder, UserMapper userMapper) {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.userMapper = userMapper;
-//        this.save("zhangsan", "123");
     }
 
     public void save(String username, String password){
@@ -43,8 +39,6 @@ public class UserService implements UserDetailsService {
             throw new UsernameNotFoundException(username + "不存在");
         }
 
-        //  User user = users.get(username);
-//        User user = getUserByUsername(username);
         return  new org.springframework.security.core.userdetails.User(
                 username, user.getEncryptedPassword() , Collections.emptyList());
     }
