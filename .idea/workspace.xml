@@ -2,15 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="de4c029b-be16-43a7-8660-4edd5981f1f6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/hello/entity/Result.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/hello/SmokeTet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/hello/service/UserServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gs-spring-boot.iml" beforeDir="false" afterPath="$PROJECT_DIR$/gs-spring-boot.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hello/configuration/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hello/configuration/WebSecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hello/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hello/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hello/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hello/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hello/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hello/mapper/UserMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/hello/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hello/service/UserService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,6 +51,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -88,6 +85,8 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
@@ -95,14 +94,51 @@
     <property name="restartRequiresConfirmation" value="false" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\java\springboot-demo\src\main" />
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="hello.service" />
     </key>
     <key name="CreateClassDialog.RecentsKey">
       <recent name="hello.service" />
     </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\java\springboot-demo\src\main" />
+    </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.UserServiceTest.testSave">
+    <configuration name="UserServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="gs-spring-boot" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="hello.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="hello.service" />
+      <option name="MAIN_CLASS_NAME" value="hello.service.UserServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceTest.testSave" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="gs-spring-boot" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="hello.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="hello.service" />
+      <option name="MAIN_CLASS_NAME" value="hello.service.UserServiceTest" />
+      <option name="METHOD_NAME" value="testSave" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="gs-spring-boot" />
       <extension name="coverage">
@@ -118,6 +154,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.UserServiceTest.testSave" />
+        <item itemvalue="JUnit.UserServiceTest" />
         <item itemvalue="Spring Boot.Application" />
       </list>
     </recent_temporary>
@@ -135,7 +173,7 @@
               <path>
                 <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
                 <item name="root:wxd@localhost [2]" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="com.intellij.database.console.session.MessageBusSession@3ebcabb4" type="9fbbdea:ServiceModel$ServiceNode" />
+                <item name="com.intellij.database.console.session.MessageBusSession@64197a0f" type="9fbbdea:ServiceModel$ServiceNode" />
               </path>
             </expand>
             <select />
@@ -176,6 +214,8 @@
       <workItem from="1579008393606" duration="7903000" />
       <workItem from="1579177921585" duration="5692000" />
       <workItem from="1579354197713" duration="5184000" />
+      <workItem from="1579775866913" duration="1031000" />
+      <workItem from="1579777636941" duration="4365000" />
     </task>
     <task id="LOCAL-00001" summary="login-module-connect-db-finish">
       <created>1579096526994</created>
@@ -229,30 +269,30 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="614" y="301" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1536.824@0.0.1536.824" timestamp="1577714774075" />
-    <state x="372" y="6" key="CommitChangelistDialog2" timestamp="1579183170731">
+    <state x="372" y="6" key="CommitChangelistDialog2" timestamp="1579444231785">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="372" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1579183170731" />
+    <state x="372" y="6" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1579444231785" />
     <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1578572279872">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1578572279872" />
-    <state width="1493" height="333" key="GridCell.Tab.0.bottom" timestamp="1579444212453">
+    <state width="1493" height="333" key="GridCell.Tab.0.bottom" timestamp="1579783205698">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="333" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1579444212453" />
-    <state width="1493" height="333" key="GridCell.Tab.0.center" timestamp="1579444212453">
+    <state width="1493" height="333" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1579783205698" />
+    <state width="1493" height="333" key="GridCell.Tab.0.center" timestamp="1579783205698">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="333" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1579444212453" />
-    <state width="1493" height="333" key="GridCell.Tab.0.left" timestamp="1579444212453">
+    <state width="1493" height="333" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1579783205698" />
+    <state width="1493" height="333" key="GridCell.Tab.0.left" timestamp="1579783205697">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="333" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1579444212453" />
-    <state width="1493" height="333" key="GridCell.Tab.0.right" timestamp="1579444212453">
+    <state width="1493" height="333" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1579783205697" />
+    <state width="1493" height="333" key="GridCell.Tab.0.right" timestamp="1579783205698">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="333" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1579444212453" />
+    <state width="1493" height="333" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1579783205698" />
     <state width="1493" height="333" key="GridCell.Tab.1.bottom" timestamp="1579444212454">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -293,14 +333,18 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="490" y="154" width="561" height="524" key="StructurePopup/0.0.1536.824@0.0.1536.824" timestamp="1578668816489" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1579183176111">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1579444235144">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1579183176111" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1579444235144" />
     <state x="668" y="302" width="340" height="236" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1579354854821">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="668" y="302" width="340" height="236" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/0.0.1536.824@0.0.1536.824" timestamp="1579354854821" />
+    <state x="540" y="130" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1579778198471">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="540" y="130" key="com.intellij.testIntegration.createTest.CreateTestDialog/0.0.1536.824@0.0.1536.824" timestamp="1579778198471" />
     <state x="447" y="19" width="642" height="786" key="find.popup" timestamp="1578746697545">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
