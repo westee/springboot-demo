@@ -6,6 +6,7 @@ import hello.service.UserService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -29,9 +30,8 @@ public class AuthController {
     @GetMapping("/auth")
     @ResponseBody // 解决Spring MVC的遗留问题。这个注释指明方法的返回值应该被限定在web的响应体中。
     public Object auth() {
-        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
-
-        User loggedInUser = userService.getUserByUsername(userName);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User loggedInUser = userService.getUserByUsername(authentication == null ? null : authentication.getName());
 
         if (loggedInUser == null) {
             return new Result("ok", "用户未登录", false);
@@ -46,7 +46,7 @@ public class AuthController {
         String username = usernameAndPassword.get("username");
         String password = usernameAndPassword.get("password");
         if (username == null || password == null) {
-            return Result.failResult( "用户名或密码不能为空");
+            return Result.failResult("用户名或密码不能为空");
         }
 
         if (username.length() < 6 || username.length() > 15) {
@@ -59,23 +59,18 @@ public class AuthController {
 
         try {
             userService.save(username, password);
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-            return  Result.failResult("用户已存在");
+            return Result.failResult("用户已存在");
         }
         return new Result("ok", "注册成功", false);
     }
 
     @GetMapping("/auth/logout")
     @ResponseBody
-    public Object logout(){
+    public Object logout() {
         SecurityContextHolder.clearContext();
         return Result.successResult("注销成功");
-//        if(loggedInUser == null){
-//            return new Result("fail","用户没有登陆",false);
-//        } else {
-//            return new Result("ok", "注销成功", false);
-//        }
     }
 
     @PostMapping("/auth/login")
@@ -87,7 +82,7 @@ public class AuthController {
         try {
             userDetails = userService.loadUserByUsername(username);
         } catch (UsernameNotFoundException e) {
-            return  Result.failResult("用户不存在");
+            return Result.failResult("用户不存在");
         }
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
 
@@ -101,4 +96,4 @@ public class AuthController {
         }
     }
 
-   }
+}

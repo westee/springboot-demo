@@ -1,5 +1,6 @@
 package hello.service;
 
+import hello.entity.Result;
 import hello.entity.User;
 import hello.mapper.UserMapper;
 import org.springframework.security.core.userdetails.UserDetails;
