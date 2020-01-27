@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.MediaType;
@@ -34,29 +35,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class AuthControllerTest {
     private MockMvc mvc;
 
+    @Mock
     private UserService userService;
+    @Mock
     private AuthenticationManager authenticationManager;
+
     private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
     @BeforeEach
     void setUp() {
         mvc = MockMvcBuilders.standaloneSetup(new AuthController(authenticationManager, userService)).build();
-        /**
-         * 使用 @BeforeEach 注解实际调用情况如下
-         *     AuthControllerTest testInstance1 = new AuthControllerTest();
-         *     testInstance1.setUp();
-         *     testInstance1.test1();
-         *
-         *     AuthControllerTest testInstance2 = new AuthControllerTest();
-         *     testInstance2.setUp();
-         *     testInstance2.test2();
-         *  避免状态共享
-         *
-         */
     }
 
     @Test
-    public void returnNotLoginByDefault() throws Exception {
+     void returnNotLoginByDefault() throws Exception {
         mvc.perform(get("/auth")).andExpect(status().isOk())
                 .andExpect(mvcResult -> Assertions.assertTrue(mvcResult.getResponse().getContentAsString().contains("用户没有登录")));
     }
@@ -93,19 +85,5 @@ class AuthControllerTest {
         mvc.perform(get("/auth").session((MockHttpSession) session)).andExpect(status().isOk())
                 .andExpect(mvcResult -> Assertions.assertTrue(mvcResult.getResponse().getContentAsString().contains("张三")));
     }
-
-    @Test
-    void auth() {
-
-    }
-
-    @Test
-    void register() {
-    }
-
-    @Test
-    void logout() {
-    }
-
 
 }
