@@ -3,6 +3,7 @@ package hello.controller;
 import hello.entity.Result;
 import hello.entity.User;
 import hello.service.UserService;
+import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -27,7 +28,7 @@ public class AuthController {
         this.userService = userService;
     }
 
-    @GetMapping("/auth")
+    @GetMapping(value = "/auth")
     @ResponseBody // 解决Spring MVC的遗留问题。这个注释指明方法的返回值应该被限定在web的响应体中。
     public Object auth() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

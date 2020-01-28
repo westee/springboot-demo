@@ -92,6 +92,25 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>6.2.0</version>
+                <configuration>
+                    <url>jdbc:mysql://localhost:3306/</url>
+                    <user>root</user>
+                    <password>my-secret-pw</password>
+                    <schemas>
+                        <schema>schema1</schema>
+                        <schema>schema2</schema>
+                        <schema>schema3</schema>
+                    </schemas>
+                    <placeholders>
+                        <keyABC>valueXYZ</keyABC>
+                        <otherplaceholder>value123</otherplaceholder>
+                    </placeholders>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
