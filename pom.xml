@@ -96,19 +96,24 @@
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>6.2.0</version>
                 <configuration>
-                    <url>jdbc:mysql://localhost:3306/</url>
+                    <url>jdbc:mysql://localhost:3306/wxd</url>
                     <user>root</user>
                     <password>my-secret-pw</password>
-                    <schemas>
-                        <schema>schema1</schema>
-                        <schema>schema2</schema>
-                        <schema>schema3</schema>
-                    </schemas>
-                    <placeholders>
-                        <keyABC>valueXYZ</keyABC>
-                        <otherplaceholder>value123</otherplaceholder>
-                    </placeholders>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>test-database-setup</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>migrate</goal>
+                        </goals>
+                        <configuration>
+                            <url>jdbc:mysql://localhost:3307/wxd?useSSL=false&amp;allowPublicKeyRetrieval=true</url>
+                            <user>root</user>
+                            <password>my-secret-pw</password>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -137,8 +142,6 @@
                 </dependencies>
             </plugin>
         </plugins>
-
-
     </build>
 
 </project>
