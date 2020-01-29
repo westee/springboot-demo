@@ -19,11 +19,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.util.MimeType;
 
-import javax.print.attribute.standard.Media;
 import javax.servlet.http.HttpSession;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.HashMap;
@@ -58,7 +55,7 @@ class AuthControllerTest {
                         new ResultMatcher() {
                             @Override
                             public void match(MvcResult result) throws Exception {
-                                Assertions.assertTrue(result.getResponse().getContentAsString().contains("用户未登录"));
+                                Assertions.assertTrue(result.getResponse().getContentAsString(StandardCharsets.UTF_8).contains("用户未登录"));
                             }
                         }
 //                        mvcResult -> Assertions.assertTrue(mvcResult.getResponse().getContentAsString().contains("用户未登录"))

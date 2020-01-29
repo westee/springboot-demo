@@ -9,6 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -39,12 +40,17 @@ class UserServiceTest {
     @Test
     public void testLoadUserByUsernameFailed() {
         Assertions.assertThrows(UsernameNotFoundException.class,
-                () -> userService.loadUserByUsername("myUser"));
+                () -> userService.loadUserByUsername("user"));
     }
 
     @Test
     public void testLoadUserByUsernameSuccess() {
         Mockito.when(userMapper.findUserByUsername("user"))
                 .thenReturn(new User(123, "user","encodePassword"));
+
+        UserDetails userDetails = userService.loadUserByUsername("user");
+
+        Assertions.assertEquals("user", userDetails.getUsername());
+        Assertions.assertEquals("encodePassword", userDetails.getPassword());
     }
 }
