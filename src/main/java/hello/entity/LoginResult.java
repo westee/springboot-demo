@@ -9,11 +9,11 @@ public class LoginResult extends Result<User> {
     }
 
     public static Result success( String msg, boolean isLogin) {
-        return new LoginResult("ok","msg", null, isLogin);
+        return new LoginResult("ok",msg, null, isLogin);
     }
 
     public static Result success( String msg, boolean isLogin,User user) {
-        return new LoginResult("ok","msg", user, isLogin);
+        return new LoginResult("ok",msg, user, isLogin);
     }
 
     public static Result fail(String msg) {
